@@ -35,13 +35,13 @@ def inviteConnectionsToTheCompany(driver, connection_invited):
                         driver.implicitly_wait(3)
 
 
-                        while invited_people <= 10:
+                        while invited_people <= 1:
                             checkboxes = driver.find_elements(By.XPATH, '//input[@type="checkbox"]')
 
                             for checkbox in checkboxes:
                                 if 'checkbox-invitee-suggestion' in checkbox.get_attribute('outerHTML'):
                                     if not checkbox.is_selected():  # Check if the checkbox is not already selected
-                                        if(invited_people > 10):
+                                        if(invited_people > 1):
                                             break
                                         parent_checkbox_element = checkbox.find_element(By.XPATH, './..')
 
@@ -74,18 +74,26 @@ def inviteConnectionsToTheCompany(driver, connection_invited):
                         time.sleep(2)
 
                         # Dismiss the modal after the invites
-                        dismiss_buttons = driver.find_elements(By.XPATH, '//button[contains(@class, "artdeco-button--circle") and contains(@class, "artdeco-modal__dismiss")]')
-                        for dismiss_button in dismiss_buttons:
-                            if '#close-medium' in dismiss_button.get_attribute('outerHTML'):
-                                driver.execute_script("arguments[0].click();", dismiss_button)
-                                time.sleep(2)
-                                try:
-                                    alert = driver.switch_to.alert
-                                    alert.accept()
-                                    logger.info("Closed the modal and accepted any alerts.")
-                                except:
-                                    logger.info("No alert found to accept.")
+                        # dismiss_buttons = driver.find_elements(By.XPATH, '//button[contains(@class, "artdeco-button--circle") and contains(@class, "artdeco-modal__dismiss")]')
+                        # for dismiss_button in dismiss_buttons:
+                        #     if '#close-medium' in dismiss_button.get_attribute('outerHTML'):
+                        #         driver.execute_script("arguments[0].click();", dismiss_button)
+                        #         time.sleep(2)
+                        #         try:
+                        #             alert = driver.switch_to.alert
+                        #             alert.accept()
+                        #             logger.info("Closed the modal and accepted any alerts.")
+                        #         except:
+                        #             logger.info("No alert found to accept.")
+                        #         break
+
+                        invite_buttons = driver.find_elements(By.XPATH, "//button[@class='artdeco-button artdeco-button--2 artdeco-button--primary ember-view']")
+                        for invite_button in invite_buttons:
+                            if('Invite' in invite_button.get_attribute('outerHTML') and 'Invite connections' not in invite_button.get_attribute('outerHTML')):
+                                print(invite_button.get_attribute('outerHTML'))
+                                # invite_button.click()
                                 break
+                
                 if(found_invite_button == False): logger.warning("No Invite Button Found for Company")
 
     except NoSuchElementException as e:
