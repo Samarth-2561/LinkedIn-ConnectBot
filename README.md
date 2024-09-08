@@ -1,4 +1,4 @@
-# LinkedIn Bot Scrapper
+# LinkedIn ConnectBot
 
 ## Overview
 
