@@ -2,7 +2,7 @@
 
 ## Overview
 
-LinkedIn Bot Scrapper is an automation tool designed to scrape company profiles from a list, enable notifications on their pages, and automatically send invitations to your connections. It helps manage your LinkedIn connections and interactions more efficiently by automating repetitive tasks.
+LinkedIn ConnectBot is an automation tool designed to scrape company profiles from a list, enable notifications on their pages, and automatically send invitations to your connections. It helps manage your LinkedIn connections and interactions more efficiently by automating repetitive tasks.
 
 ## Features
 
@@ -70,10 +70,10 @@ python main.py
 ## Usage
 
 1. Update your company list in company_list.txt (or wherever you store the list of companies).
-2. Run the LinkedIn Bot Scrapper:
+2. Run the LinkedIn ConnectBot:
 
 ```
-python linkedin_bot_scrapper.py
+python main.py
 ```
 
 3. The bot will start scraping the company profiles, enabling notifications, and inviting connections. You can monitor the process through the terminal or log files.
