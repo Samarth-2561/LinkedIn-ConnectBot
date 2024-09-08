@@ -61,6 +61,15 @@ source ./venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### 6. Create .env file
+
+Create a .env file and add your email under key 'EMAIL' and password under key 'PASSWORD'
+
+```
+EMAIL=<your_email>
+PASSWORD=<your_password>
+```
+
 ### 6. Run the Script
 
 ```
