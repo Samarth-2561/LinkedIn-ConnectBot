@@ -26,13 +26,13 @@ To set up and run the LinkedIn Bot Scrapper on your machine, follow the steps be
 ### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/linkedin-bot-scrapper.git
+git clone https://github.com/Samarth-2561/LinkedIn-ConnectBot.git
 ```
 
 ### 2. Navigate to the project directory
 
 ```
-cd linkedin-bot-scrapper
+cd LinkedIn-ConnectBot
 ```
 
 ### 3. Create a Python Virtual Environment:
