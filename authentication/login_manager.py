@@ -40,7 +40,9 @@ def loginUserUsingPassword(driver):
         if driver.current_url != "https://www.linkedin.com/feed/":
             logger.warning("Login not successful, possibly due to 2FA. Waiting for manual 2FA input.")
             # Pause to allow for manual 2FA code entry
-            time.sleep(15)
+            while('challenge' in driver.current_url):
+                logger.warning("2FA required, Waiting for manual 2FA input..")
+                time.sleep(15)
 
         # After successful login, navigate to network manager and store cookies
         driver.get("https://www.linkedin.com/mynetwork/network-manager/company/")

@@ -14,15 +14,15 @@ def inviteConnectionsToTheCompany(driver, connection_invited):
         for button in buttons:
             if '#overflow-web-ios-small' in button.get_attribute('innerHTML'):
                 driver.execute_script("arguments[0].click();", button)
-                time.sleep(7)
-                driver.implicitly_wait(7)
-
+                time.sleep(3)
+                driver.implicitly_wait(3)
+                found_invite_button = False
                 # Find the invite connections button
                 invite_buttons = driver.find_elements(By.XPATH, '//button[contains(@class, "org-overflow-menu__item")]')
                 for invite_button in invite_buttons:
                     print(invite_button.get_attribute('innerHTML'))
                     if '#connect-medium' in invite_button.get_attribute('innerHTML'):
-                        print("Got Button")
+                        found_invite_button = True
                         invite_button.click()
                         logger.info("Clicked the invite connections button.")
                         time.sleep(5)
@@ -86,6 +86,7 @@ def inviteConnectionsToTheCompany(driver, connection_invited):
                                 except:
                                     logger.info("No alert found to accept.")
                                 break
+                if(found_invite_button == False): logger.warning("No Invite Button Found for Company")
 
     except NoSuchElementException as e:
         logger.error(f"Element not found while inviting connections: {e}")

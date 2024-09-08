@@ -4,7 +4,7 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException,
 from selenium.webdriver.common.by import By
 
 
-def getUniqueCompaniesIdsForScrapping(driver, company_parsed_data, companies_to_load=3):
+def getUniqueCompaniesIdsForScrapping(driver, company_parsed_data, companies_to_load=10):
     try:
         logger.info("Starting company ID scraping process with target of loading {} companies.", companies_to_load)
         companies_loaded = 0
@@ -58,6 +58,8 @@ def getUniqueCompaniesIdsForScrapping(driver, company_parsed_data, companies_to_
                 if company_id not in unique_company_ids:  # Avoid duplicates while preserving order
                     unique_company_ids.append(company_id)
                     logger.debug("Unique company ID {} extracted.", company_id)
+                    if(len(unique_company_ids) == 10):
+                        break
         
         logger.info("Total unique company IDs extracted: {}", len(unique_company_ids))
         return unique_company_ids 
