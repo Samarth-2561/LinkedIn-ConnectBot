@@ -87,12 +87,13 @@ def inviteConnectionsToTheCompany(driver, connection_invited):
                         #             logger.info("No alert found to accept.")
                         #         break
 
-                        invite_buttons = driver.find_elements(By.XPATH, "//button[@class='artdeco-button artdeco-button--2 artdeco-button--primary ember-view']")
-                        for invite_button in invite_buttons:
-                            if('Invite' in invite_button.get_attribute('outerHTML') and 'Invite connections' not in invite_button.get_attribute('outerHTML')):
-                                print(invite_button.get_attribute('outerHTML'))
-                                # invite_button.click()
-                                break
+                        time.sleep(2)
+                        # invite_buttons = driver.find_elements(By.XPATH, "//button[@class='artdeco-button artdeco-button--2 artdeco-button--primary ember-view']")
+                        # for invite_button in invite_buttons:
+                        #     if('Invite' in invite_button.get_attribute('outerHTML') and 'Invite connections' not in invite_button.get_attribute('outerHTML')):
+                        #         print(invite_button.get_attribute('outerHTML'))
+                        #         # invite_button.click()
+                        #         break
                 
                 if(found_invite_button == False): logger.warning("No Invite Button Found for Company")
 

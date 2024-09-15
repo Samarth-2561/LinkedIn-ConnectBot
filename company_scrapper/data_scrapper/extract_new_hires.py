@@ -3,7 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from .data_scrapper.util.csv_writer import writeCompanyNewHires
+from .util.csv_writer import writeCompanyNewHires
+from .extract_alumni import extractNotableAlumni
 
 from loguru import logger
 
@@ -18,6 +19,22 @@ def extractNewHires(driver, company_id='upstart-network'):
     wait.until(EC.presence_of_element_located(
         (By.XPATH, "//section[@data-view-name='premium-insights-talent-change-card']"))
     )
+    
+    # Locate the section and scroll into view
+    try:
+        section = wait.until(EC.presence_of_element_located(
+            (By.XPATH, "//section[@data-view-name='premium-insights-talent-change-card']")
+        ))
+        logger.info("Located the 'premium-insights-talent-change-card' section.")
+
+        # Scroll to the section to bring it into view
+        driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });", section)
+        logger.info("Scrolled to the 'New Hires' section.")
+
+    except Exception as e:
+        logger.error("Failed to locate or scroll to the 'New Hires' section.")
+        logger.error(f"Exception: {e}")
+    
     logger.info("Locating the 'premium-insights-talent-change-card' section.")
     section = driver.find_element(By.XPATH, "//section[contains(@data-view-name, 'premium-insights-talent-change-card')]")
 
@@ -85,5 +102,7 @@ def extractNewHires(driver, company_id='upstart-network'):
     writeCompanyNewHires(company_name=company_name, new_hires_data=data)
 
     logger.info(f"New Hires data extracted and written to csv for company {company_name}. No of New Hires Extracted: {len(data)}")
-    time.sleep(500)
+
+    extractNotableAlumni(driver=driver, company_name=company_name)
+    
     return data

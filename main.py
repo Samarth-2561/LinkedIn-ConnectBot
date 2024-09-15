@@ -38,9 +38,11 @@ def main():
 
         logger.info("Starting the Scrapping Process")
 
-        company_ids = getUniqueCompaniesIdsForScrapping(driver=driver, company_parsed_data=company_parsed_data)
-        
+        company_ids = getUniqueCompaniesIdsForScrapping(driver=driver, company_parsed_data=company_parsed_data, companies_to_load=5)
+
         extractCompaniesData(driver=driver, company_ids=company_ids, company_parsed_data=company_parsed_data, connection_invited=connection_invited)
+
+        logger.info(f"processed and visited {len(company_ids)} companies")
 
         time.sleep(500)
     except Exception as e:

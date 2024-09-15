@@ -6,6 +6,8 @@ from .follower_handler import clickTheFollowButton
 from selenium.webdriver.common.by import By
 
 from .connection_handler import inviteConnectionsToTheCompany
+from .extract_new_hires import extractNewHires
+
 
 def has_connection(driver):
     try:
@@ -44,10 +46,19 @@ def extractCompaniesData(driver, company_ids, company_parsed_data, connection_in
                 raise
 
             # Step 2: Click the 3 dots and invite the specific friend (Functionality to be added)
+            # try:
+            #     inviteConnectionsToTheCompany(driver=driver, connection_invited=connection_invited)
+            # except Exception as e:
+            #     logger.error(f"Failed to invite connections for company ID {company_id}: {e}")
+            #     raise
+
+            
+            # Step 3: Extract Data from Insights
             try:
-                inviteConnectionsToTheCompany(driver=driver, connection_invited=connection_invited)
+                logger.info(f"Attempting to extract insights for company ID: {company_id}")
+                extractNewHires(driver=driver, company_id=company_id)
             except Exception as e:
-                logger.error(f"Failed to invite connections for company ID {company_id}: {e}")
+                logger.error(f"Failed to follow or set notifications for company ID {company_id}: {e}")
                 raise
             
             # Prepare the payload and write to CSV
