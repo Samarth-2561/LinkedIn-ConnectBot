@@ -43,7 +43,6 @@ def extractCompaniesData(driver, company_ids, company_parsed_data, connection_in
                 clickTheFollowButton(driver=driver, company_id=company_id)
             except Exception as e:
                 logger.error(f"Failed to follow or set notifications for company ID {company_id}: {e}")
-                raise
 
             # Step 2: Click the 3 dots and invite the specific friend (Functionality to be added)
             # try:
@@ -59,7 +58,6 @@ def extractCompaniesData(driver, company_ids, company_parsed_data, connection_in
                 extractNewHires(driver=driver, company_id=company_id)
             except Exception as e:
                 logger.error(f"Failed to follow or set notifications for company ID {company_id}: {e}")
-                raise
             
             # Prepare the payload and write to CSV
             company_payload = {
