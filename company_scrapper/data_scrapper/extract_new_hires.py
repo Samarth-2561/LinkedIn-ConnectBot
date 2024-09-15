@@ -19,6 +19,9 @@ def extractNewHires(driver, company_id='upstart-network'):
     wait.until(EC.presence_of_element_located(
         (By.XPATH, "//section[@data-view-name='premium-insights-talent-change-card']"))
     )
+
+    time.sleep(10)
+    driver.implicitly_wait(10)
     
     # Locate the section and scroll into view
     try:
@@ -26,9 +29,10 @@ def extractNewHires(driver, company_id='upstart-network'):
             (By.XPATH, "//section[@data-view-name='premium-insights-talent-change-card']")
         ))
         logger.info("Located the 'premium-insights-talent-change-card' section.")
-
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
+        
         # Scroll to the section to bring it into view
-        driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });", section)
+        # driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });", section)
         logger.info("Scrolled to the 'New Hires' section.")
 
     except Exception as e:
