@@ -1,6 +1,7 @@
 
 import pandas as pd
 from loguru import logger
+import os
 
 def writeCompanyDataToCSV(company_data):
     try:
@@ -20,4 +21,23 @@ def writeConnectionsToCSV(connection_invites):
         logger.error("Permission denied: Unable to write to connection_invites.csv. Ensure the file is not open elsewhere. Error: {}", str(e))
     except Exception as e:
         logger.error("Unexpected error occurred while writing connection invites to CSV: {}", str(e))
+        raise
+
+def createNewHiresFolder():
+    if not os.path.exists("documents/new_hires"):
+        os.makedirs("documents/new_hires")
+        logger.info(f"Directory new_hires  created.")
+    else:
+        logger.info(f"Directory new_hires already exists.")
+
+
+def writeCompanyNewHires(company_name, new_hires_data):
+    createNewHiresFolder()
+    try:
+        pd.DataFrame(new_hires_data).to_csv(f"./documents/new_hires/{company_name}.csv", mode='w', header=True, index=False)
+        logger.info(f"Successfully created the new_hires.csv for {company_name}")
+    except PermissionError as e:
+        logger.error("Permission denied: Unable to write to new_hires.csv. Ensure the file is not open elsewhere. Error: {}", str(e))
+    except Exception as e:
+        logger.error("Unexpected error occurred while writing new hires to CSV: {}", str(e))
         raise

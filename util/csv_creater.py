@@ -26,7 +26,7 @@ def createCompaniesCSVFile():
 
 def createConnectionInvitesCSVFile():
     try:
-        if not os.path.exists('./documentsconnection_invites.csv'):
+        if not os.path.exists('./documents/connection_invites.csv'):
             logger.info("Creating connection_invites.csv file with headers.")
             column_headers = ['person_name', 'person_title', 'company_url']
             with open('./documents/connection_invites.csv', mode='w', newline='') as file:
